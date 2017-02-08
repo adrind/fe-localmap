@@ -1,5 +1,7 @@
 {
   "name": "fe-localmap",
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "gmaps-for-apps": "^0.5.14"
   }
 }

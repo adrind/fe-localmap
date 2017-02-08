@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <h1>Filter jobs here!</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            {{#each types as |type|}}
+                <input type="checkbox"/>{{type}} <br/>
+            {{/each}}
+        </div>
+        <div class="col-xs-8">
+            Map
+            {{business-map businesses=businesses markers=markers polylines=routes}}
+        </div>
+    </div>
+</div>
+
+{{outlet}}
