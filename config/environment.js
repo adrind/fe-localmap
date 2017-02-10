@@ -24,6 +24,10 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV['ember-cli-mirage'] = {
+      enabled: false
+    };
+
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -55,5 +59,11 @@ module.exports = function(environment) {
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
   };
 
-    return ENV;
+  ENV['g-map'] = {
+    key: 'AIzaSyBrblSKfIOtI1z9tgV89iuN9X6r96iQD6g',
+    libraries: ['places']
+  };
+
+
+  return ENV;
 };

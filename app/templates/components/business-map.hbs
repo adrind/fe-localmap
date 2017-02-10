@@ -1,4 +1,21 @@
-{{g-maps name="my-map" lat=anchLat lng=anchLng zoom=zoom markers=markers polylines=polylines}}
+{{#g-map markersFitMode='init' lat=anchLat lng=anchLng zoom=zoom as |context|}}
+  {{#each jobs as |job|}}
+    {{#g-map-address-marker context group="job" address=job.address as |markerContext|}}
+      {{#g-map-infowindow markerContext}}
+        <p>There are <strong>{{job.num}}</strong> jobs listed at {{job.company}}</p>
+        <ul>
+        {{#each job.jobs as |post|}}
+          <li class="job-description">
+            <strong>{{post.title}}</strong>
+            <p>{{post.snippet}}</p>
+            <a href="{{post.url}}" target="_blank">Full job description</a> posted {{post.relativeTime}}
+          </li>
+        {{/each}}
+        </ul>
+      {{/g-map-infowindow}}
+    {{/g-map-address-marker}}
+  {{/each}}
+{{/g-map}}
 
 
 {{yield}}

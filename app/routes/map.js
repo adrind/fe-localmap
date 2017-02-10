@@ -19,10 +19,18 @@ export default Ember.Route.extend({
             }
         });
 
-        const routeMarkers = Ember.A([{
+        const route = Ember.A([{
             strokeColor: 'blue',
             strokeWeight: 6,
             path: model.routes.map((r) => {
+                markers.push({
+                    lat: r.get('latitude'),
+                    lng: r.get('longitude'),
+                    infoWindow: {
+                        content: `${r.get('location')}`
+                    },
+                    icon: '/assets/bus_icon.png'
+                });
                 return [r.get('latitude'), r.get('longitude')]
             }).filter((a) => a[0] != null)
         }]);
@@ -33,7 +41,7 @@ export default Ember.Route.extend({
             markers: markers,
             businesses: model.businesses,
             types: types,
-            routes: routeMarkers
+            routes: route
         })
     }
 

@@ -30,10 +30,16 @@ export default function() {
     }
   });
 
-    this.get('/routes', (schema) => {
-        return {
-            'routes': schema.db.routes
-        }
-    });
+  this.get('/routes', (schema) => {
+      return {
+          'routes': schema.db.routes
+      }
+  });
+
+  this.get('/indeedJobs', (schema) => {
+    return {
+      'jobs': schema.db.jobs
+    }
+  });
 
 }

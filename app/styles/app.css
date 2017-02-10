@@ -1,3 +1,8 @@
-.ember-cli-g-map {
-    height: 400px;
+.g-map-canvas {
+  width: 800px;
+  height: 600px;
+}
+
+.job-description {
+  margin-bottom: 10px;
 }

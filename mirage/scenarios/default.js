@@ -1,3 +1,3 @@
 export default function(server) {
-    server.loadFixtures('businesses', 'routes');
+    server.loadFixtures('businesses', 'routes', 'jobs');
 }
