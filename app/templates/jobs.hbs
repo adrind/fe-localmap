@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <h1>{{totalResults}} jobs available for {{query}}</h1>
+  </div>
+
+  <div class="row">
+    <label for="query">Search for a job</label>
+    {{input type="text" value=search id="query" placeholder="nurse"}} <button type="button" class="btn btn-default" {{action 'refreshModel'}}>Search</button>
+  </div>
+
+  <div class="row">
+    <label for="address">I want a job within one mile of </label>
+    {{input type="text" value=address id="address" placeholder="1234 Main st"}} <button type="button" class="btn btn-default" {{action 'updateModel'}}>Filter</button>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-3">
+
+      {{#each data as |company|}}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{company.company}}</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              {{#each company.jobs as |job|}}
+                <li><h5><a href="{{job.url}}" target="_blank">{{job.title}}</a></h5>
+                  <p>{{job.snippet}}</p>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="col-xs-9">
+      {{business-map mapname="Indeed search" jobs=data routes=routes}}
+    </div>
+  </div>
+</div>
+
+{{outlet}}

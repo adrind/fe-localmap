@@ -7,8 +7,7 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('map');
-  this.route('indeed', {path: '/indeed/:query'});
+  this.route('jobs');
 });
 
 export default Router;

@@ -1,6 +1,6 @@
 {{#g-map markersFitMode='init' lat=anchLat lng=anchLng zoom=zoom as |context|}}
   {{#each jobs as |job|}}
-    {{#g-map-address-marker context group="job" address=job.address as |markerContext|}}
+    {{#g-map-address-marker context group="job" address=job.address onLocationChange=(action "markerLoaded") as |markerContext|}}
       {{#g-map-infowindow markerContext}}
         <p>There are <strong>{{job.num}}</strong> jobs listed at {{job.company}}</p>
         <ul>
@@ -15,6 +15,16 @@
       {{/g-map-infowindow}}
     {{/g-map-address-marker}}
   {{/each}}
+
+
+  {{#each routes as |route|}}
+    {{#g-map-marker context group="routes" lat=route.latitude lng=route.longitude icon="/assets/622.png" as |markerContext|}}
+      {{#g-map-infowindow markerContext}}
+        <p>Route stop at <strong>{{route.location}}</strong></p>
+      {{/g-map-infowindow}}
+    {{/g-map-marker}}
+  {{/each}}
+
 {{/g-map}}
 
 

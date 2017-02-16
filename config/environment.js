@@ -60,7 +60,7 @@ module.exports = function(environment) {
   };
 
   ENV['g-map'] = {
-    key: 'AIzaSyBrblSKfIOtI1z9tgV89iuN9X6r96iQD6g',
+    key: 'AIzaSyAXUr341XG_Hgyz2_KdAQKuju3tm-p6gMQ',
     libraries: ['places']
   };
 
