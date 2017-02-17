@@ -1,42 +1,64 @@
 <div class="container">
   <div class="row">
-    <h1>{{totalResults}} jobs available for {{query}}</h1>
+    <h1>{{totalResults}} jobs available for {{query}} from {{source}}</h1>
   </div>
 
-  <div class="row">
+  <div class="row data-source">
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary {{if (eq source 'IND') ' active'}}">
+        {{input type="radio" name="IND" id="IND-input" checked=(eq source 'IND') change=(action 'sourceChanged')}} Indeed
+      </label>
+      <label class="btn btn-primary{{if (eq source 'DEA') ' active'}}">
+        {{input type="radio" name="DEA" name="DEA" id="DEA-input" checked=(eq source 'DEA') change=(action 'sourceChanged')}} USJobs.gov
+      </label>
+      <label class="btn btn-primary{{if (eq source 'AJE') ' active'}}">
+        {{input type="radio" name="AJE" name="AJE" id="AJE-input" checked=(eq source 'AJE') change=(action 'sourceChanged')}} America's Job Exchange
+      </label>
+      <label class="btn btn-primary{{if (eq source 'CB') ' active'}}">
+        {{input type="radio" name="CB" name="CB" id="CB-input" checked=(eq source 'CB') change=(action 'sourceChanged')}} Career Builder
+      </label>
+    </div>
+  </div>
+
+  <div class="row search-job">
     <label for="query">Search for a job</label>
     {{input type="text" value=search id="query" placeholder="nurse"}} <button type="button" class="btn btn-default" {{action 'refreshModel'}}>Search</button>
   </div>
 
-  <div class="row">
-    <label for="address">I want a job within one mile of </label>
-    {{input type="text" value=address id="address" placeholder="1234 Main st"}} <button type="button" class="btn btn-default" {{action 'updateModel'}}>Filter</button>
-  </div>
 
-  <div class="row">
-    <div class="col-xs-3">
+  {{#if currentlyLoading}}
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <img src="/assets/loading.gif"/>
+      </div>
+    </div>
+  {{else}}
+      <div class="row">
+        <div class="col-xs-3">
 
-      {{#each data as |company|}}
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{{company.company}}</h3>
-          </div>
-          <div class="panel-body">
-            <ul>
-              {{#each company.jobs as |job|}}
-                <li><h5><a href="{{job.url}}" target="_blank">{{job.title}}</a></h5>
-                  <p>{{job.snippet}}</p>
-                </li>
-              {{/each}}
-            </ul>
-          </div>
+          {{#each data as |company|}}
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{company.company}}</h3>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  {{#each company.jobs as |job|}}
+                    <li><h5><a href="{{job.url}}" target="_blank">{{job.title}}</a></h5>
+                      <p>{{job.snippet}}</p>
+                    </li>
+                  {{/each}}
+                </ul>
+              </div>
+            </div>
+          {{/each}}
         </div>
-      {{/each}}
-    </div>
-    <div class="col-xs-9">
-      {{business-map mapname="Indeed search" jobs=data routes=routes}}
-    </div>
-  </div>
+        <div class="col-xs-9">
+          {{business-map mapname="Indeed search" jobs=data routes=routes}}
+        </div>
+      </div>
+  {{/if}}
 </div>
+
 
 {{outlet}}

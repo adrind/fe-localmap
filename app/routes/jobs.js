@@ -1,18 +1,23 @@
 import Ember from 'ember';
 
-let searchQuery;
+let searchQuery, source;
 
 export default Ember.Route.extend({
   queryParams: {
     search: {
       refreshModel: false
+    },
+    source: {
+      refreshModel: true
     }
   },
 
   model(params) {
+    source = params.source || 'IND';
     searchQuery = params.search;
+    console.log('source', source)
 
-    const jobs = searchQuery ? this.get('store').query('job', {q: searchQuery}) : [];
+    const jobs = searchQuery ? this.get('store').query('job', {q: searchQuery, source: source}) : [];
 
     return Ember.RSVP.hash({
       jobs: jobs,
@@ -71,6 +76,14 @@ export default Ember.Route.extend({
 
     updateModel() {
       const address = this.get('address');
+    },
+
+    loading(transition) {
+      let controller = this.controllerFor('jobs');
+      controller.set('currentlyLoading', true);
+      transition.promise.finally(function() {
+        controller.set('currentlyLoading', false);
+      });
     }
   }
 });
