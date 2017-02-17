@@ -27,19 +27,19 @@ export default function() {
   this.get('/businesses', (schema) => {
     return {
       'businesses': schema.db.businesses
-    }
+    };
   });
 
   this.get('/routes', (schema) => {
       return {
           'routes': schema.db.routes
-      }
+      };
   });
 
   this.get('/indeedJobs', (schema) => {
     return {
       'jobs': schema.db.jobs
-    }
+    };
   });
 
 }
